@@ -14,7 +14,7 @@ magick convert -rotate -90 $pngfile $bmpfile
 for a in {1,2,4,5,10}
 do
     # Glitch it with sox FROM: https://maryknize.com/blog/glitch_art_with_sox_imagemagick_and_vim/
-    sox -t ul -c 1 -r 48k $bmpfile -t ul $glitchedfile trim 0 90s : echo 1 1 $((a*2)) 0.1
+    sox -t ul -c 1 -r 48k $bmpfile -t ul $glitchedfile trim 0 90s : echo 1 1 $((a*2)) 0.1 --multi-threaded --buffer 201326592
     # Rotate it by 90 degrees
     magick convert -scale $((100/(a)))% -scale $((100*(a)))% -rotate 90 $glitchedfile $bmpfile
 done
