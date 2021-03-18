@@ -68,3 +68,6 @@ alias fucking="sudo"
 
 alias mhsp="~/scripts/makehotspot.sh"
 alias khsp="~/scripts/killhotspot.sh"
+
+# file copy progress
+alias fcp="watch -n1 --color \"du -h --max-depth=3 > /tmp/__fcp_temp; wdiff -n /tmp/__fcp_oldtemp /tmp/__fcp_temp | colordiff | sed -e '/\[-.*-\]/d' -e 's/{\+//g' -e 's/\+}//g'; mv /tmp/__fcp_temp /tmp/__fcp_oldtemp\""

@@ -16,7 +16,7 @@ source ~/scripts/shell/private_stuff.sh
 
 # Oh my zsh stuff:
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 POWERLEVEL9K_MODE='nerdfont-complete'
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
@@ -29,11 +29,12 @@ plugins=(
 #  zsh-autosuggestions
 #  zsh-syntax-highlighting
 )
-bindkey -v
+#bindkey -v
+#set -o vi
 
 source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 cd ~
