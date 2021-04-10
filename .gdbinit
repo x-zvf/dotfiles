@@ -1,1 +1,1 @@
-source /usr/share/pwndbg/gdbinit.py
+source /home/xzvf/.local/install/pwndbg/gdbinit.py
