@@ -1,1 +1,1 @@
-source /usr/share/pwndbg/gdbinit.py
+#source /usr/share/pwndbg/gdbinit.py
