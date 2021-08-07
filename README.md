@@ -1,6 +1,13 @@
 # xzvf's Dotfiles
 ---
-The dotfiles are a mess right now. Until I get around to properly set up i3,
-please don't use them.
+![os](https://img.shields.io/badge/OS-Fedora-blue.svg)
+![i3](https://img.shields.io/badge/WM-i3-green.svg)
+![edior](https://img.shields.io/badge/editor-neovim-lightblue.svg)
+![browser](https://img.shields.io/badge/browser-firefox_developer_edition-orange.svg)
+![terminal](https://img.shields.io/badge/terminal-alacritty-red.svg)
+![shell](https://img.shields.io/badge/shell-ZSH_powerlevel10k-blue.svg)
 
-The tagged commits however should be mostly usable
+
+Currently a work in progress.
+
+![scrot with my new 4k monitor](scrots/new.png)

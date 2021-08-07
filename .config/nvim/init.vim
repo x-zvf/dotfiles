@@ -37,7 +37,9 @@ set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set termguicolors
 syntax enable
 set background=dark
-"colorscheme solarized8
+"lua require('colorbuddy').colorscheme('gruvbuddy')
+"colorscheme gruvbox
+colorscheme solarized8
 
 "set guicursor
 
@@ -65,5 +67,3 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 let g:ale_completion_enabled = 1
 set omnifunc=ale#completion#OmniFunc
 
-"lua require('colorbuddy').colorscheme('gruvbuddy')
-colorscheme gruvbox
