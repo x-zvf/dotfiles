@@ -67,3 +67,5 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 let g:ale_completion_enabled = 1
 set omnifunc=ale#completion#OmniFunc
 
+"latexmk pdf
+autocmd FileType tex nmap <buffer> <C-T> :!latexmk -pdf %<CR>

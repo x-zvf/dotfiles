@@ -32,6 +32,8 @@ floating_modifier $mod
 
 
 #Starting programs
+exec xbindkeys
+exec unclutter
 exec_always --no-startup-id setxkbmap -option caps:escape,compose:ralt gb
 exec_always --no-startup-id autorandr -c
 exec_always --no-startup-id	"pkill -f \"autoname_workspace.py\";~/scripts/autoname_workspaces.py"
