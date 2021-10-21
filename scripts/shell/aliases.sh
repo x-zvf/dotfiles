@@ -73,3 +73,7 @@ alias khsp="~/scripts/killhotspot.sh"
 alias fcp="watch -n1 --color \"du -h --max-depth=3 > /tmp/__fcp_temp; wdiff -n /tmp/__fcp_oldtemp /tmp/__fcp_temp | colordiff | sed -e '/\[-.*-\]/d' -e 's/{\+//g' -e 's/\+}//g'; mv /tmp/__fcp_temp /tmp/__fcp_oldtemp\""
 
 alias gla="glances --enable-plugin sensors"
+
+alias mh="~/scripts/makehotspot.sh"
+alias kh="~/scripts/killhotspot.sh"
+
