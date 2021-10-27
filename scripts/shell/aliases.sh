@@ -77,3 +77,4 @@ alias gla="glances --enable-plugin sensors"
 alias mh="~/scripts/makehotspot.sh"
 alias kh="~/scripts/killhotspot.sh"
 
+alias kitvpn="sudo openvpn --config ~/Documents/kit.ovpn"
