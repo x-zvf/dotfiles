@@ -78,3 +78,5 @@ alias mh="~/scripts/makehotspot.sh"
 alias kh="~/scripts/killhotspot.sh"
 
 alias kitvpn="sudo openvpn --config ~/Documents/kit.ovpn"
+
+alias emacs="emacsclient -c -a 'emacs'"

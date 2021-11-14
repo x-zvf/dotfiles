@@ -19,8 +19,8 @@ scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
 #----External monitor
-[bar/bar1lgh]
-monitor = "DP-3"
+[bar/bar1hek]
+monitor = "DP-1-1"
 width = 100%
 height = 16
 

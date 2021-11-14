@@ -56,8 +56,8 @@ if [ "$(hostname -s)" = "beryllium" ]; then
     polybar barc &
 else
 	polybar bar0 &
-    if [ "$(autorandr | grep '(current)' | cut -d ' ' -f 1)" = "lghtop" ]; then
-        polybar bar1lgh &
+    if [ "$(autorandr | grep '(current)' | cut -d ' ' -f 1)" = "hek" ]; then
+        polybar bar1hek &
     else
         polybar bar1 &
     fi

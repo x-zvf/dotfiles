@@ -48,10 +48,10 @@ exec_always --no-startup-id feh --bg-fill ~/Wal/bg_solarized_k.jpg
 
 
 # class                 border  backgr. text    indicator
-#client.focused          #002b36 #586e75 #fdf6e3 #268bd2
-#client.focused_inactive #002b36 #073642 #839496 #073642
-#client.unfocused        #002b36 #073642 #839496 #073642
-#client.urgent           #002b36 #dc322f #fdf6e3 #002b36
+client.focused          #002b36 #586e75 #fdf6e3 #268bd2
+client.focused_inactive #002b36 #073642 #839496 #073642
+client.unfocused        #002b36 #073642 #839496 #073642
+client.urgent           #002b36 #dc322f #fdf6e3 #002b36
 
 # gruvbox colours from: https://github.com/a-schaefers/i3-wm-gruvbox-theme/blob/master/i3/config
 
@@ -75,10 +75,10 @@ set $darkgray #1d2021
 
 # blue gruvbox
 # class                 border|backgr|text|indicator|child_border
-client.focused          $blue $blue $darkgray $purple $darkgray
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
-client.urgent           $red $red $white $red $red
+#client.focused          $blue $blue $darkgray $purple $darkgray
+#client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+#client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+#client.urgent           $red $red $white $red $red
 
 
 # Autostart windows
@@ -204,8 +204,8 @@ bindsym $mod+Shift+y gaps outer current minus 5
 bindsym $mod+Shift+u gaps outer current plus 5
 
 #Trying to fix urxvt border
-new_window none
-default_border pixel 0
+#new_window none
+#default_border pixel 2
 # screen lock
 bindsym $mod+x	exec ~/scripts/scrlock.sh
 
