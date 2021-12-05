@@ -79,4 +79,8 @@ alias kh="~/scripts/killhotspot.sh"
 
 alias kitvpn="sudo openvpn --config ~/Documents/kit.ovpn"
 
-alias emacs="emacsclient -c -a 'emacs'"
+#alias emacs="emacsclient -c -a 'emacs'"
+
+#Apparently `which` is not POSIX and deprecated
+alias which="command -v"
+
