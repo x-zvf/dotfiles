@@ -84,3 +84,4 @@ alias kitvpn="sudo openvpn --config ~/Documents/kit.ovpn"
 #Apparently `which` is not POSIX and deprecated
 alias which="command -v"
 
+alias vnc="x11vnc -auth .Xauthority -forever -loop -noxdamage -repeat -rfbauth /home/xzvf/.x11vnc.pass -rfbport 5900 -shared -ncache_cr" # do not use -ncache 10
