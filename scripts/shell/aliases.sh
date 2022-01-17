@@ -27,8 +27,8 @@ alias wlan-up="sudo ip link set wlo1 up"
 alias wlan-down="sudo ip link set wlo1 down"
 
 # Make
-alias make="/usr/bin/make -j 8"
-export MAKEFLAGS='-j 8'
+alias make="/usr/bin/make -j$(nproc)"
+export MAKEFLAGS="-j$(nproc)"
 
 
 # Random
