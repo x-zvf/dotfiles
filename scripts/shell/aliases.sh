@@ -58,8 +58,8 @@ alias findssh="sudo nmap -sS -p 22"
 alias xur="reboot"
 alias fm="mbsync -a && notmuch new"
 
-alias subl="/opt/sublime_text/sublime_text"
-alias smerge="/opt/sublime_merge/sublime_merge"
+#alias subl="/opt/sublime_text/sublime_text"
+#alias smerge="/opt/sublime_merge/sublime_merge"
 
 alias nvmon="watch -n1 nvidia-smi"
 
