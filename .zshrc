@@ -16,7 +16,7 @@ source ~/scripts/shell/private_stuff.sh
 
 # Oh my zsh stuff:
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 POWERLEVEL9K_MODE='nerdfont-complete'
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
