@@ -8,7 +8,7 @@ alias gcln="git clone"
 alias gstat="git status"
 alias gstapush="git stash push"
 alias gstapop="git stash pop"
-alias gcom="git commit -m"
+alias gcom="git commit"
 alias gdiff="git diff"
 alias ga="git add"
 
