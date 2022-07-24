@@ -49,6 +49,8 @@ alias mntshared="[[ -z $(mount | grep /shared) ]] && sudo mount -t ntfs-3g -o um
 alias l="lsd -lah"
 alias b="bat"
 
+alias tg="topgrade"
+
 # Fix crappy software
 alias unfuckadb="sudo adb kill-server; sudo adb start-server; adb devices"
 
@@ -79,9 +81,10 @@ alias kh="~/scripts/killhotspot.sh"
 
 alias kitvpn="sudo openvpn --config ~/Documents/kit.ovpn"
 
-#alias emacs="emacsclient -c -a 'emacs'"
+alias emacs="emacsclient -c -a 'emacs'"
 
 #Apparently `which` is not POSIX and deprecated
 alias which="command -v"
 
 alias vnc="x11vnc -auth .Xauthority -forever -loop -noxdamage -repeat -rfbauth /home/xzvf/.x11vnc.pass -rfbport 5900 -shared -ncache_cr" # do not use -ncache 10
+
