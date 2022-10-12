@@ -1,0 +1,5 @@
+[user]
+	email = peter@bohner.me
+	name = Péter Bohner (xzvf)
+[pull]
+	rebase = true
