@@ -39,11 +39,7 @@ plugins=(
 #fastfetch
 source $ZSH/oh-my-zsh.sh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 bindkey -v
-[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
 if [ "$(hostname)" = "lithium-win" ]; then
     cd /mnt/c/Users/xacc/Projects
     # Start Docker daemon automatically when logging in if not running.
@@ -55,5 +51,6 @@ if [ "$(hostname)" = "lithium-win" ]; then
     fi
 fi;
 
+[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
