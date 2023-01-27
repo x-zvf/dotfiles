@@ -37,7 +37,7 @@ export MAKEFLAGS="-j$(nproc)"
 
 # Simple QOL improvements
 alias t=tmuxinator
-alias v=nvim
+alias v=lvim
 alias sv="sudo nvim"
 alias se="sudo -e"
 
