@@ -18,8 +18,7 @@ alias ogh="$BROWSER https://github.com/x-zvf"
 alias gy='git commit -am "`curl -s http://whatthecommit.com/index.txt`"'
 
 # Youtube dl
-alias yt-dl-song="youtube-dl -f bestaudio 0 -i --add-metadata --metadata-from-title \"'(?P<artist>.+?)\s*-\s*(?P<title>.+?)-.*'\" "
-alias yt-dl-cm-s="youtube-dl -x --audio-format best --audio-quality 0 -i --add-metadata --metadata-from-title"
+alias yt-dl-mp3="yt-dlp -x --audio-format mp3 --audio-quality 0 -i --add-metadata --metadata-from-title"
 
 
 # Wifi
@@ -38,8 +37,7 @@ export MAKEFLAGS="-j$(nproc)"
 # Simple QOL improvements
 alias t=tmuxinator
 alias v=lvim
-alias sv="sudo nvim"
-alias se="sudo -e"
+alias sv="sudo -e"
 
 alias music='systemctl start mpd --user;ncmpcpp'
 
@@ -48,6 +46,8 @@ alias mntshared="[[ -z $(mount | grep /shared) ]] && sudo mount -t ntfs-3g -o um
 # Better standart unix tools
 alias l="lsd -lah"
 alias b="bat"
+
+alias o="xdg-open"
 
 alias tg="topgrade"
 
