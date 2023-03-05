@@ -29,6 +29,8 @@ alias wlan-down="sudo ip link set wlo1 down"
 alias make="/usr/bin/make -j$(nproc)"
 export MAKEFLAGS="-j$(nproc)"
 
+#wsl
+alias exp="explorer.exe ."
 
 # Random
 #alias fucking="sudo !!"

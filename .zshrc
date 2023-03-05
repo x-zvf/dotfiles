@@ -1,3 +1,19 @@
+if [ "$(uname -a | grep -Eoh 'WSL2')" != "" ]; then
+   cd ~
+    RUNNING=`ps aux | grep dockerd | grep -v grep`
+    if [ -z "$RUNNING" ]; then
+        sudo dockerd > /dev/null 2>&1 &
+        disown
+        echo WSL: started dockerd
+    fi
+    RUNNING=`ps aux | grep crond | grep -v grep`
+    if [ -z "$RUNNING" ]; then
+        sudo crond
+        echo WSL: started crond
+    fi
+fi;
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -40,17 +56,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 bindkey -v
-if [ "$(hostname)" = "lithium-win" ]; then
-    cd /mnt/c/Users/xacc/Projects
-    # Start Docker daemon automatically when logging in if not running.
-    RUNNING=`ps aux | grep dockerd | grep -v grep`
-    if [ -z "$RUNNING" ]; then
-        sudo dockerd > /dev/null 2>&1 &
-        disown
-        echo started dockerd
-    fi
-fi;
 
 [[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
