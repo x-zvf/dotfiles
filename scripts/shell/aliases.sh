@@ -38,7 +38,7 @@ alias exp="explorer.exe ."
 
 # Simple QOL improvements
 alias t=tmuxinator
-alias v=lvim
+alias v=nvim
 alias sv="sudo -e"
 
 alias music='systemctl start mpd --user;ncmpcpp'
