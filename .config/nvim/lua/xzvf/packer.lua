@@ -59,6 +59,8 @@ return require('packer').startup(function(use)
       "MunifTanjim/nui.nvim",
     }
   }
-  use("github/copilot.vim")
+  use "github/copilot.vim"
+  use "terrortylor/nvim-comment"
+
 end)
 
