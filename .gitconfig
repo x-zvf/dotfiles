@@ -3,3 +3,8 @@
 	name = Péter Bohner (xzvf)
 [pull]
 	rebase = true
+[credential "https://git.praktomat.cs.kit.edu"]
+	helper = 
+	helper = !/usr/bin/glab auth git-credential
+[credential]
+	helper = store

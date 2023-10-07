@@ -41,6 +41,9 @@ alias t=tmuxinator
 alias v=nvim
 alias sv="sudo -e"
 
+#alacritty causes problems
+alias ssh='TERM=xterm-256color ssh'
+
 alias music='systemctl start mpd --user;ncmpcpp'
 
 alias mntshared="[[ -z $(mount | grep /shared) ]] && sudo mount -t ntfs-3g -o umask=022,gid=998,uid=1000 /dev/sda5 /shared"
