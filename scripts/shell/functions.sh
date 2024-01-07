@@ -80,3 +80,7 @@ loadNVM() {
     source /usr/share/nvm/bash_completion
     source /usr/share/nvm/install-nvm-exec
 }
+
+srcvenv() {
+    source "~/install/venvs/$1/bin/activate"
+}
