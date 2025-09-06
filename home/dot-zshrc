@@ -1,0 +1,78 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+source /usr/share/zsh-antidote/antidote.zsh
+antidote load
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+wttr()
+{
+  local request="wttr.in/"
+  [ "$(tput cols)" -lt 125 ] && request+='?n'
+  curl -H "Accept-Language: $\{LANG%_*}" --compressed "$request"
+}
+s() {
+  nohup $@ </dev/null >/dev/null 2>&1 &
+}
+gucp() {
+git add -u
+  git commit -m "$1"
+  git push
+}
+# proper up-arrow searching
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "$terminfo[kcuu1]" history-beginning-search-backward-end
+bindkey "$terminfo[kcud1]" history-beginning-search-forward-end
+
+# normal+e -> edit command in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd e edit-command-line
+
+autoload -Uz promptinit && promptinit && prompt powerlevel10k
+
+setopt interactivecomments
+
+alias v="nvim"
+alias sv="sudo -e"
+alias l="lsd -lh"
+alias la="lsd -lah"
+alias b="bat"
+alias o="xdg-open"
+
+alias tree="tree -C"
+
+alias ga="git add"
+alias gu="git add -u; git commit -m "
+alias gpsh="git push"
+alias gpll="git pull"
+alias gstat="git status"
+alias gcom="git commit"
+alias gdiff="git diff"
+alias gstapush="git stash push"
+alias gstapop="git stash pop"
+
+alias glances="glances --enable-plugin sensors"
+alias ssh="TERM=xterm-256color ssh"
+alias unfuckadb="sudo adb kill-server; sudo adb start-server; adb devices"
+alias unfuckzt="sudo systemctl restart zerotier-one.service systemd-resolved.service systemd-networkd.service NetworkManager"
+alias yt-dl-mp3="yt-dlp -x --audio-format mp3 --audio-quality 0 -i --add-metadata --metadata-from-title"
+
+
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt appendhistory
+
+source <(fzf --zsh)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

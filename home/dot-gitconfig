@@ -1,0 +1,19 @@
+[commit]
+  gpgsign = true
+[gpg]
+  format = ssh
+[core]
+  pager = delta
+[user]
+  email = peter@bohner.me
+  name = Péter Bohner (xzvf)
+  signingkey = ~/.ssh/id_ed25519.pub
+[push]
+  autoSetupRemote = true
+  default = current
+[pull]
+  rebase = true
+[credential]
+  helper = store
+[init]
+  defaultBranch = master
