@@ -61,7 +61,10 @@ yay -S \
     nautilus \
     pferd \
     timewarrior \
-    otf-firamono-nerd \
+    ttf-firacode-nerd \
+    tmux-plugin-manager \
+    tree-sitter-cli \
+    distrobox \
     locate
 
 flatpak install flathub io.github.ungoogled_software.ungoogled_chromium
