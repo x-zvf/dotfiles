@@ -8,6 +8,8 @@ antidote load
 export EDITOR=nvim
 export VISUAL=nvim
 
+export PATH="/home/xzvf/go/bin:$PATH"
+
 mkcd() {
   mkdir -p "$1" && cd "$1"
 }
