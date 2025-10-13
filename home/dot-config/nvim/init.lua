@@ -175,6 +175,7 @@ require("lazy").setup({
         servers = {
           lua_ls = {},
           clangd = {},
+          arduino_language_server = {},
           gopls = {},
           pyright = {},
           rust_analyzer = {},
@@ -240,6 +241,10 @@ require("lazy").setup({
           end,
         },
       },
+      {
+        "nvim-treesitter/nvim-treesitter-context",
+        opts = {},
+      },
 
       {
         "rachartier/tiny-inline-diagnostic.nvim",
@@ -251,6 +256,7 @@ require("lazy").setup({
         },
       },
     },
+    --{ "anurag3301/nvim-platformio.lua", opts = {} },
     { "folke/lazydev.nvim", ft = "lua", opts = {} },
     {
       "stevearc/conform.nvim",
@@ -264,6 +270,11 @@ require("lazy").setup({
           go = { "gofmt" },
           c = { "clang-format" },
           cpp = { "clang-format" },
+        },
+        formatters = {
+          clang_format = {
+            prepend_args = { "--style=file" },
+          },
         },
       },
       keys = {
@@ -327,6 +338,24 @@ vim.api.nvim_create_autocmd("BufWritePre", {
       require("conform").format({ bufnr = args.buf })
     end
   end,
+})
+
+local telescope = require("telescope")
+local telescopeConfig = require("telescope.config")
+local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+table.insert(vimgrep_arguments, "--hidden")
+table.insert(vimgrep_arguments, "--glob")
+table.insert(vimgrep_arguments, "!**/.git/*")
+telescope.setup({
+  defaults = {
+    -- `hidden = true` is not supported in text grep commands.
+    vimgrep_arguments = vimgrep_arguments,
+  },
+  pickers = {
+    find_files = {
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+    },
+  },
 })
 
 local builtin = require("telescope.builtin")
