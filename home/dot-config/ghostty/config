@@ -9,3 +9,4 @@ scrollback-limit = 10485760
 window-height = 35
 window-width = 120
 theme = Dracula+
+window-inherit-working-directory = false
