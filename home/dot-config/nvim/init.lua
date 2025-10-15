@@ -305,6 +305,7 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
     },
+    { "lewis6991/gitsigns.nvim", opts = {} },
   },
   install = { colorscheme = { "carbonfox" } },
   checker = { enabled = true },
