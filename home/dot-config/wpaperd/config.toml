@@ -1,0 +1,5 @@
+[default]
+duration = "5m"
+mode = "center"
+sorting = "ascending"
+path = "/home/xzvf/Pictures/Wallpapers/"

@@ -68,6 +68,8 @@ alias unfuckadb="sudo adb kill-server; sudo adb start-server; adb devices"
 alias unfuckzt="sudo systemctl restart zerotier-one.service systemd-resolved.service systemd-networkd.service NetworkManager"
 alias yt-dl-mp3="yt-dlp -x --audio-format mp3 --audio-quality 0 -i --add-metadata --metadata-from-title"
 
+alias htop="sudo htop"
+alias btop="sudo btop"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
@@ -78,3 +80,9 @@ source <(fzf --zsh)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+function loadnvm() {
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
