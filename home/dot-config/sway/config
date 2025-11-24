@@ -156,6 +156,7 @@ bindsym --locked XF86AudioMute         exec pactl set-sink-mute @DEFAULT_SINK@ t
 
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
+bindsym XF86AudioMedia        exec systemctl suspend
 
 bindsym $mod+Shift+s exec slurp | grim -g - - | tee ~/Pictures/Screenshots/screenshot_$(date +%s).png | wl-copy
 
