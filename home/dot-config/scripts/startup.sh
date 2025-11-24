@@ -12,7 +12,7 @@ execifn() {
 }
 
 execifn dunst dunst
-systemctl --user restart kanshi.service
+execifn shikane shikane
 
 pkill waybar; waybar &
 
@@ -42,5 +42,4 @@ then
     swayidle -w before-sleep "loginctl lock-session $XDG_SESSION_ID" lock "playerctl -a pause && swaylock" &
 fi
 
-kanshictl reload
-
+shikanectl reload
