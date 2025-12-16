@@ -35,6 +35,7 @@ vim.opt.scrolloff = 5
 vim.opt.spell = true
 vim.opt.spelllang = { "en", "de", "hu" }
 vim.opt.colorcolumn = { 81, 121 }
+vim.opt.mousescroll = "ver:1,hor:1"
 
 -- we are using vim-sleuth so these are only the fallback values
 vim.opt.tabstop = 4
@@ -243,7 +244,10 @@ require("lazy").setup({
       },
       {
         "nvim-treesitter/nvim-treesitter-context",
-        opts = {},
+        opts = {
+          mode = "topline",
+          separator = "-",
+        },
       },
 
       {
@@ -315,6 +319,7 @@ require("lazy").setup({
         -- Uncomment this to get verbose logging to help diagnose internal Conjure issues
         -- This is VERY helpful when reporting an issue with the project
         -- vim.g["conjure#debug"] = true
+        vim.g["conjure#mapping#doc_word"] = "k"
       end,
 
       -- Optional cmp-conjure integration
