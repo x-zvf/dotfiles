@@ -181,7 +181,15 @@ require("lazy").setup({
           pyright = {},
           rust_analyzer = {},
           ts_ls = {},
-          emmet_language_server = {},
+          emmet_language_server = {
+            init_options = {
+              includeLanguages = {
+                javascriptreact = "html",
+                typescriptreact = "html",
+              },
+            },
+          },
+          svelte = {},
           tailwindcss = {},
           clojure_lsp = {},
           ltex = {
@@ -234,6 +242,9 @@ require("lazy").setup({
         highlight = {
           enable = true,
           disable = function(lang, buf)
+            if lang == "svelte" then
+              return false
+            end
             local max_filesize = 100 * 1024
             local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
             if ok and stats and stats.size > max_filesize then
@@ -312,7 +323,8 @@ require("lazy").setup({
     { "lewis6991/gitsigns.nvim", opts = {} },
     {
       "Olical/conjure",
-      ft = { "clojure", "fennel", "python" }, -- etc
+      --ft = { "clojure", "fennel", "python" }, -- etc
+      ft = { "clojure", "fennel" }, -- etc
       lazy = true,
       init = function()
         -- Set configuration options here
@@ -383,7 +395,8 @@ telescope.setup({
   },
   pickers = {
     find_files = {
-      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--glob", "!**/node_modules/*" },
+      --find_command = { "rg", "--files", "--hidden" },
     },
   },
 })
@@ -419,6 +432,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(event)
     local map = function(keys, func, desc)
       vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+    end
+
+    local buf = event.data and event.data.bufnr or event.buf
+
+    local ft = vim.bo[buf].filetype
+    if ft == "svelte" or ft == "javascriptreact" or ft == "typescriptreact" then
+      vim.cmd("TSBufEnable highlight")
     end
 
     map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
