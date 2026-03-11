@@ -1,3 +1,7 @@
 outputs = "All"
 position = "Top"
 
+[modules]
+left = [ "Workspaces" ]
+center = [ "WindowTitle" ]
+right = [ "SystemInfo", [  "Tray", "Clock", "Privacy", "Settings" ] ]
