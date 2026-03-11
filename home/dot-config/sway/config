@@ -19,7 +19,7 @@ exec_always dbus-update-activation-environment  WAYLAND_DISPLAY DISPLAY XDG_CURR
 
 
 # start a terminal
-bindsym $mod+Return exec ghostty 
+bindsym $mod+Return exec kitty
 
 # start a python shell
 #bindsym $mod+Shift+Return exec st -e ~/scripts/al.sh py 
@@ -160,4 +160,5 @@ bindsym XF86AudioMedia        exec systemctl suspend
 
 bindsym $mod+Shift+s exec slurp | grim -g - - | tee ~/Pictures/Screenshots/screenshot_$(date +%s).png | wl-copy
 
+include ~/.config/sway/outputs
 exec_always ~/.config/scripts/startup.sh

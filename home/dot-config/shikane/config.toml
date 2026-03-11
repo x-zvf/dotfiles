@@ -1,15 +1,12 @@
 [[profile]]
 name = "laptop"
-exec = [
-  "swaymsg output 'eDP-1' subpixel none",
-]
 
 [[profile.output]]
 search = 'eDP-1'
 enable = true
 mode = "2256x1504@59.999Hz"
 position = '0,0'
-scale = 1.25
+scale = 1
 transform = 'normal'
 adaptive_sync = false
 
@@ -19,21 +16,16 @@ name = "docked"
 
 [[profile.output]]
 enable = true
-search = ["m=0x0BCA", "s=", "v=BOE"]
-mode = "2256x1504@59.999Hz"
-position = "6096,957"
-scale = 1.25
+search = ["m=DELL 2407WFP", "s=UY5457390H2S ", "v=Dell Inc."]
+mode = "1920x1200@59.95Hz"
+position = "336,480"
+scale = 1.0
 transform = "normal"
 adaptive_sync = false
 
 [[profile.output]]
-enable = true
-search = ["m=DELL 2407WFP", "s=UY5457390H2S ", "v=Dell Inc."]
-mode = "1920x1200@59.95Hz"
-position = "3304,2160"
-scale = 1.0
-transform = "normal"
-adaptive_sync = false
+enable = false
+search = ["m=0x0BCA", "s=", "v=BOE"]
 
 [[profile.output]]
 enable = true
@@ -46,27 +38,24 @@ adaptive_sync = false
 
 
 [[profile]]
-name = "itec"
-exec = [
-  "swaymsg output 'eDP-1' subpixel none",
-  "swaymsg output 'Dell Inc. DELL U2715H GH85D7CN1HPS' subpixel none",
-]
+name = "oslab-right"
 
 [[profile.output]]
-search = 'eDP-1'
 enable = true
-mode = "2256x1504@59.999Hz"
-position = '1128,1440'
-scale = 1
-transform = 'normal'
-adaptive_sync = false
-
-[[profile.output]]
-search = 'Dell Inc. DELL U2715H GH85D7CN1HPS'
-enable = true
+search = ["m=DELL U2715H", "s=GH85D81T0SHL", "v=Dell Inc."]
 mode = "2560x1440@59.951Hz"
-position = '1128,0'
-scale = 1
-transform = 'normal'
+position = "0,0"
+scale = 1.0
+transform = "normal"
 adaptive_sync = false
+
+[[profile.output]]
+enable = true
+search = ["m=0x0BCA", "s=", "v=BOE"]
+mode = "2256x1504@59.999Hz"
+position = "0,1440"
+scale = 1.25
+transform = "normal"
+adaptive_sync = false
+
 

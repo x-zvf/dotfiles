@@ -145,7 +145,20 @@ require("lazy").setup({
         keymap = { preset = "default" },
         appearance = { nerd_font_variant = "mono" },
 
-        completion = { documentation = { auto_show = true } },
+        completion = {
+          ghost_text = {
+            enabled = true,
+          },
+          documentation = { auto_show = true },
+          menu = {
+            draw = {
+              columns = {
+                { "label", "label_description", gap = 1 },
+                { "kind_icon", "kind" },
+              },
+            },
+          },
+        },
         sources = {
           default = { "lazydev", "lsp", "path", "snippets", "buffer" },
           providers = {
@@ -178,19 +191,47 @@ require("lazy").setup({
           clangd = {},
           arduino_language_server = {},
           gopls = {},
+          templ = {},
           pyright = {},
           rust_analyzer = {},
           ts_ls = {},
+          html = {
+            filetypes = { "html", "templ" },
+          },
+          htmx = {
+            filetypes = { "html", "templ" },
+          },
           emmet_language_server = {
+            filetypes = {
+              "templ",
+              "css",
+              "eruby",
+              "html",
+              "javascript",
+              "javascriptreact",
+              "less",
+              "sass",
+              "scss",
+              "pug",
+              "typescriptreact",
+            },
             init_options = {
-              includeLanguages = {
-                javascriptreact = "html",
-                typescriptreact = "html",
-              },
+              --includeLanguages = {
+              --  html = "html",
+              --  templ = "html",
+              --  javascriptreact = "html",
+              --  typescriptreact = "html",
+              --},
+              --showSuggestionsAsSnippets = true,
             },
           },
           svelte = {},
-          tailwindcss = {},
+          tailwindcss = {
+            --includeLanguages = {
+            --  templ = "html",
+            --  html = "html",
+            --},
+          },
           clojure_lsp = {},
           ltex = {
             language = "en-GB",
@@ -230,8 +271,8 @@ require("lazy").setup({
           -- `opts[server].capabilities, if you've defined it
           config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
           --lspconfig[server].setup(config)
-          vim.lsp.enable(server)
           vim.lsp.config(server, config)
+          vim.lsp.enable(server)
         end
       end,
     },
@@ -273,6 +314,13 @@ require("lazy").setup({
     },
     --{ "anurag3301/nvim-platformio.lua", opts = {} },
     { "folke/lazydev.nvim", ft = "lua", opts = {} },
+    {
+      "olrtg/nvim-emmet",
+      ft = { "html", "templ", "erb" },
+      config = function()
+        vim.keymap.set({ "n", "v" }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
+      end,
+    },
     {
       "stevearc/conform.nvim",
       opts = {
@@ -438,7 +486,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local ft = vim.bo[buf].filetype
     if ft == "svelte" or ft == "javascriptreact" or ft == "typescriptreact" then
-      vim.cmd("TSBufEnable highlight")
+      vim.treesitter.start(buf, "tsx")
+      vim.bo[buf].syntax = "ON"
+    elseif ft == "templ" then
+      vim.treesitter.start(buf, "templ")
+      vim.bo[buf].syntax = "ON"
     end
 
     map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
@@ -486,3 +538,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+vim.filetype.add({ extension = { templ = "templ" } })
