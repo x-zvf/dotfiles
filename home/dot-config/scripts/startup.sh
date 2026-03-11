@@ -14,7 +14,8 @@ execifn() {
 execifn dunst dunst
 execifn shikane shikane
 
-pkill waybar; waybar &
+#pkill waybar; waybar &
+execifn ashell ashell
 
 execifn pasystray pasystray
 execifn nm-applet nm-applet
