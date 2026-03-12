@@ -79,17 +79,25 @@ local autoformat = true
 require("lazy").setup({
   spec = {
     -- theming
+    -- {
+    --   "EdenEast/nightfox.nvim",
+    --   config = function()
+    --     vim.cmd.colorscheme("catpuccin-macchiato")
+    --   end,
+    -- },
     {
-      "EdenEast/nightfox.nvim",
+      "catppuccin/nvim",
+      name = "catppuccin",
+      priority = 1000,
       config = function()
-        vim.cmd.colorscheme("carbonfox")
+        vim.cmd.colorscheme("catppuccin")
       end,
     },
     {
       "nvim-lualine/lualine.nvim",
       opts = {
         options = {
-          theme = "carbonfox",
+          theme = "catppuccin",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
         },
@@ -396,7 +404,7 @@ require("lazy").setup({
     --  end,
     --},
   },
-  install = { colorscheme = { "carbonfox" } },
+  install = { colorscheme = { "catppuccin" } },
   checker = { enabled = true },
   defaults = { lazy = false },
 })

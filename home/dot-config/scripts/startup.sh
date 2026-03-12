@@ -10,15 +10,24 @@ execifn() {
         $@ &
     fi
 }
+rstrt() {
+    pkill $1
+    $@ &
+}
+
+rstrt waybar
+rstrt pasystray
+rstrt nm-applet
+rstrt hyprpaper
 
 execifn dunst dunst
 execifn shikane shikane
 
 #pkill waybar; waybar &
-execifn ashell ashell
+#execifn ashell ashell
 
-execifn pasystray pasystray
-execifn nm-applet nm-applet
+#execifn pasystray pasystray
+#execifn nm-applet nm-applet
 
 #execifn wpaper wpaperd -d
 execifn kwalletd6 kwalletd6 -d
