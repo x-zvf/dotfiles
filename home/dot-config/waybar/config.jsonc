@@ -20,7 +20,7 @@
         "backlight",
         "power-profiles-daemon",
         "idle_inhibitor",
-        "keyboard-state",
+        //"keyboard-state",
         "clock"
     ],
     "hyprland/workspaces": {
