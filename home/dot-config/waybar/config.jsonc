@@ -27,7 +27,7 @@
         "disable-scroll": true,
         "all-outputs": false,
         "warp-on-scroll": false,
-        "format": "{icon}{name}:{windows}",
+        "format": "{icon}{name}: {windows}",
         "format-icons": {
             "urgent": " ",
             "visible": " ",
@@ -42,8 +42,9 @@
             "title<.*erdium.*>": " ",
             "title<.*ignal.*>": "󰭹 ",
             "title<.*iscord.*>": " ",
-            "class<thunderbird>": " ",
-            "kitty": "",
+            "title<.*hunderbird.*>": " ",
+            "title<.*otify.*>": " ",
+            "kitty": " ",
         },
 
     },

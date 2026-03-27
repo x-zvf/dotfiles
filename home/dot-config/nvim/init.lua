@@ -81,26 +81,25 @@ local autoformat = true
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- theming
-    -- {
-    --   "EdenEast/nightfox.nvim",
-    --   config = function()
-    --     vim.cmd.colorscheme("catpuccin-macchiato")
-    --   end,
-    -- },
     {
-      "catppuccin/nvim",
-      name = "catppuccin",
-      priority = 1000,
+      "EdenEast/nightfox.nvim",
       config = function()
-        vim.cmd.colorscheme("catppuccin")
+        vim.cmd.colorscheme("carbonfox")
       end,
     },
+    -- {
+    --   "catppuccin/nvim",
+    --   name = "catppuccin",
+    --   priority = 1000,
+    --   config = function()
+    --     vim.cmd.colorscheme("catppuccin")
+    --   end,
+    -- },
     {
       "nvim-lualine/lualine.nvim",
       opts = {
         options = {
-          theme = "catppuccin",
+          theme = "carbonfox",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
         },
@@ -138,7 +137,7 @@ require("lazy").setup({
         { "<leader>ts", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "[T]rouble [S]ymbols" },
         {
           "<leader>tls",
-          "<cmd>Troublejlsp toggle focus=false win.position=right<cr>",
+          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
           desc = "[T] [LS]P Definitions / references / ...",
         },
         { "<leader>tll", "<cmd>Trouble loclist toggle<cr>", desc = "[T]rouble [L]ocation List" },
@@ -376,6 +375,18 @@ require("lazy").setup({
       },
     },
     {
+      "nvim-tree/nvim-tree.lua",
+      dependencies = {
+        "nvim-tree/nvim-web-devicons",
+      },
+      config = function()
+        require("nvim-tree").setup({})
+      end,
+      keys = {
+        { "<C-n>", "<cmd>NvimTreeToggle<CR>" },
+      },
+    },
+    {
       "nvim-telescope/telescope.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
     },
@@ -407,7 +418,7 @@ require("lazy").setup({
     --  end,
     --},
   },
-  install = { colorscheme = { "catppuccin" } },
+  install = { colorscheme = { "carbonfox" } },
   checker = { enabled = true },
   defaults = { lazy = false },
 })

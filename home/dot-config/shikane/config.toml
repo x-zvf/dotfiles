@@ -53,9 +53,28 @@ adaptive_sync = false
 enable = true
 search = ["m=0x0BCA", "s=", "v=BOE"]
 mode = "2256x1504@59.999Hz"
-position = "0,1440"
-scale = 1.25
+position = "2560,0"
+scale = 1.0
 transform = "normal"
 adaptive_sync = false
 
+[[profile]]
+name = "oslab-top"
 
+[[profile.output]]
+enable = true
+search = ["m=P27-8 TE Pro", "s=YVBH011414", "v=Fujitsu Siemens Computers GmbH"]
+mode = "2560x1440@59.951Hz"
+position = "0,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = true
+search = ["m=0x0BCA", "s=", "v=BOE"]
+mode = "2256x1504@59.999Hz"
+position = "0,1440"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
