@@ -3,12 +3,14 @@ font pango:Fira Code Nerd Font Mono 10
 
 input type:keyboard {
   xkb_layout gb
-  xkb_options caps:swapescape,compose:ralt
+  xkb_options compose:ralt
 }
 input type:touchpad {
     tap enabled
     natural_scroll enabled
 }
+
+include ~/.cache/wal/colors-sway
 
 
 floating_modifier $mod
@@ -41,8 +43,8 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# split in horizontal orientation
-bindsym $mod+b split h
+# split in horizontal orientation, consistent with my nvim bindings
+bindsym $mod+s split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -51,9 +53,12 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#[R]egular
+bindsym $mod+r layout toggle split 
+#[T]abbed
 bindsym $mod+t layout tabbed
-bindsym $mod+n layout toggle split
+#y: because it is next to r,t,
+bindsym $mod+y layout stacking
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -65,6 +70,10 @@ assign [title="^.*irefox.*"] workspace number 1
 assign [title="^.*hunderbird.*"] workspace number 2
 assign [title="^.*erdium.*"] workspace number 2
 assign [title="^.*ignal.*"] workspace number 2
+assign [title="^.*iscord.*"] workspace number 2
+assign [title="^.*potify.*"] workspace number 2
+
+#for_window [class="^.*"] border pixel 0
 
 workspace 2 output eDP-1
 
@@ -98,7 +107,6 @@ bindsym $mod+less move workspace to output left
 
 
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
 
 mode "resize" {
 
@@ -109,10 +117,10 @@ mode "resize" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+        bindsym $mod+shift+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+shift+r mode "resize"
 
 
 #border none
@@ -123,12 +131,12 @@ gaps outer 2
 smart_borders on
 smart_gaps on
 
-bindsym $mod+y       gaps inner current minus 6
-bindsym $mod+u       gaps inner current plus 6
-bindsym $mod+Shift+y gaps outer current minus 6
-bindsym $mod+Shift+u gaps outer current plus 6
+bindsym $mod+i       gaps inner current plus 6
+bindsym $mod+Shift+i gaps inner current minus 6
+bindsym $mod+o       gaps outer current plus 6
+bindsym $mod+Shift+o gaps outer current minus 6
 
-# default_border pixel 0
+default_border pixel 1
 
 bindsym $mod+F12 exec systemctl --user start swaylock
 
@@ -140,8 +148,15 @@ client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
-client.background       #F8F8F2
+client.background       $background
 
+blur enable
+blur_xray disable
+blur_passes 2
+blur_radius 10
+blur_noise 0
+
+shadows enable
 
 bindsym $mod+c exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
 bindsym --locked XF86AudioPlay exec playerctl play-pause
@@ -159,6 +174,16 @@ bindsym XF86MonBrightnessUp   exec brightnessctl set +5%
 bindsym XF86AudioMedia        exec systemctl suspend
 
 bindsym $mod+Shift+s exec slurp | grim -g - - | tee ~/Pictures/Screenshots/screenshot_$(date +%s).png | wl-copy
+
+
+bindsym $mod+x exec '~/.config/scripts/scrnlock.sh --grace 3'
+
+exec_always killall -9 swayidle; swayidle -w \
+  timeout 600 '~/.config/scripts/scrnlock.sh --grace 10 --fade-in 4' \
+  timeout 660 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep '~/.config/scripts/scrnlock.sh'
+
 
 include ~/.config/sway/outputs
 exec_always ~/.config/scripts/startup.sh

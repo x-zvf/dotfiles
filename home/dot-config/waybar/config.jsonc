@@ -4,30 +4,45 @@
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     // "width": 1280, // Waybar width
     "modules-left": [
-        "hyprland/workspaces"
+        //"hyprland/workspaces"
+        "custom/left",
+        "sway/workspaces",
+        "sway/mode"
     ],
     "modules-center": [
-        "hyprland/window"
+        "custom/right",
+        "sway/window",
+        "custom/left"
     ],
     "modules-right": [
         "network",
+        "custom/sep",
         "cpu",
+        "custom/sep",
         "memory",
+        "custom/sep",
         "temperature",
+        "custom/sep",
         "battery",
+        "custom/sep",
         "tray",
+        "custom/sep",
         "pulseaudio",
+        "custom/sep",
         "backlight",
+        "custom/sep",
         "power-profiles-daemon",
+        "custom/sep",
         "idle_inhibitor",
-        //"keyboard-state",
-        "clock"
+        "custom/sep",
+        "clock",
+        "custom/right"
     ],
-    "hyprland/workspaces": {
+    "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
         "warp-on-scroll": false,
-        "format": "{icon}{name}: {windows}",
+        "format": "{name} {windows}",
         "format-icons": {
             "urgent": " ",
             "visible": " ",
@@ -38,15 +53,15 @@
         "window-rewrite-default": " ",
         "window-rewrite": {
             "class<chromium>": " ",
-            "class<firefox>": " ", // Windows whose classes are "firefox"
+            "class<firefox>": " ",
+            "title<.*olume.*>":" ",
             "title<.*erdium.*>": " ",
             "title<.*ignal.*>": "󰭹 ",
             "title<.*iscord.*>": " ",
             "title<.*hunderbird.*>": " ",
             "title<.*otify.*>": " ",
-            "kitty": " ",
-        },
-
+            "kitty": " "
+        }
     },
     "keyboard-state": {
         "numlock": true,
@@ -60,13 +75,14 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": " idle inhb",
-            "deactivated": " idle norm"
+            "activated": "󰅶",
+            "deactivated": "󰒲"
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 21,
         "spacing": 10,
+        "show-passive-items": true
     },
     "clock": {
         // "timezone": "America/New_York",
@@ -89,50 +105,47 @@
         },
     },
     "cpu": {
-        "format": " cpu {usage}%",
+        "format": " {usage}%",
     },
     "memory": {
-        "format": " ram {}%"
+        "format": " {}%"
     },
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{icon} temp {temperatureC}°C",
-        "format-icons": ["", "", ""]
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": [""]
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{icon} bl {percent}%",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format": " {icon}{percent}%",
+        "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     },
     "battery": {
         "states": {
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon} bat {capacity}%",
-        "format-full": "{icon} full {capacity}%", 
-        "format-charging": "{icon}  chrg {capacity}%",
-        "format-plugged": "{icon}  plug {capacity}%",
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%", 
+        "format-charging": "{icon}󱐋 {capacity}%",
+        "format-plugged": "{icon} {capacity}%",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "power-profiles-daemon": {
       "format": "{icon}",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
+        "default": " DFL",
+        "performance": " PRF",
+        "balanced": " BAL",
+        "power-saver": " SVR"
       }
     },
     "network": {
@@ -147,14 +160,26 @@
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{icon}{volume}%",
-        "format-muted": "󰝟 ",
+        "format-muted": "󰝟 MUTE",
         "format-icons": {
             "headphone": " ",
             "phone": " ",
             "portable": " ",
             "car": " ",
-            "default": [" ", " ", " "]
+            "default": ["󰕿 ", "󰖀 ", "󰕾 "] 
         },
         "on-click": "pavucontrol"
     },
+    "custom/left": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/right": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/sep": {
+        "format": "╱",
+        "tooltip": false
+    }
 }

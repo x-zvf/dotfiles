@@ -1,2 +1,4 @@
 set debuginfod enabled on
 set auto-load safe-path /
+set history save on
+#source /w/miscsrc/pwndbg/gdbinit.py

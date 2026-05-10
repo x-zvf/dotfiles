@@ -11,44 +11,26 @@ execifn() {
     fi
 }
 rstrt() {
-    pkill $1
+    pkill -9 $1
     $@ &
 }
+pkill -9 kded6
 
 rstrt waybar
-rstrt pasystray
-rstrt nm-applet
-rstrt hyprpaper
-
+rstrt swaybg -i ~/.config/wallpaper
 execifn dunst dunst
 execifn shikane shikane
-
-#pkill waybar; waybar &
-#execifn ashell ashell
-
-#execifn pasystray pasystray
-#execifn nm-applet nm-applet
-
-#execifn wpaper wpaperd -d
 execifn kwalletd6 kwalletd6 -d
-
 execifn wl-paste wl-paste --watch cliphist store
 
-#swaymsg 'workspace number 1; layout tabbed'
+
 execifn firefox firefox
-
-#swaymsg 'workspace number 9; layout tabbed'
-
 execifn ferdium ferdium
 execifn signal-desktop signal-desktop --password-store="kwallet6"
 execifn thunderbird thunderbird
 execifn nextcloud nextcloud
 
-execifn hypridle hypridle
-
-#sleep 1
-
-#swaymsg 'workspace number 2'
+rstrt pasystray
+rstrt nm-applet
 
 shikanectl reload
-hyprpm reload -n

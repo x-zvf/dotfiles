@@ -11,3 +11,4 @@ window-width = 120
 theme = Dracula+
 window-inherit-working-directory = false
 mouse-scroll-multiplier = 0.25
+bell-features=no-audio
