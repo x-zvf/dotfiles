@@ -20,12 +20,14 @@ exec_always systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURR
 exec_always dbus-update-activation-environment  WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME OZONE_WL
 
 
-# start a terminal
 bindsym $mod+Return exec kitty
+bindsym $mod+Shift+Return exec kitty --class scratchtty
+bindsym $mod+q exec qalculate-qt --title scratchcalc
+for_window [app_id="scratchtty"] floating enable, move scratchpad, scratchpad show
+for_window [title="scratchcalc"] floating enable, move scratchpad, scratchpad show
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
 
-# start a python shell
-#bindsym $mod+Shift+Return exec st -e ~/scripts/al.sh py 
-# kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
@@ -43,11 +45,9 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# split in horizontal orientation, consistent with my nvim bindings
-bindsym $mod+s split h
-
-# split in vertical orientation
-bindsym $mod+v split v
+# splits, consistent with my nvim bindings
+bindsym $mod+s split v
+bindsym $mod+v split h
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
