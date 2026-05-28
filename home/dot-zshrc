@@ -8,16 +8,16 @@ antidote load
 export EDITOR=nvim
 export VISUAL=nvim
 
-export PATH="/home/xzvf/.cargo/bin/:/home/xzvf/go/bin:/home/xzvf/.local/bin:$PATH"
+export PATH="/home/xzvf/.cargo/bin/:/home/xzvf/go/bin:/home/xzvf/.local/bin:/home/xzvf/.local/share/gem/ruby/3.4.0/bin:$PATH"
 
 mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 wttr()
 {
-  local request="wttr.in/"
+  local request="http://v2.wttr.in/"
   [ "$(tput cols)" -lt 125 ] && request+='?n'
-  curl -H "Accept-Language: $\{LANG%_*}" --compressed "$request"
+  curl -L -k -H "Accept-Language: $\{LANG%_*}" --compressed "$request"
 }
 s() {
   nohup $@ </dev/null >/dev/null 2>&1 &
@@ -37,7 +37,7 @@ bindkey "$terminfo[kcud1]" history-beginning-search-forward-end
 # normal+e -> edit command in $EDITOR
 autoload -U edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd e edit-command-line
+bindkey -M vicmd q edit-command-line
 
 autoload -Uz promptinit && promptinit && prompt powerlevel10k
 
