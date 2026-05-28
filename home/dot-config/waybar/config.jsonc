@@ -88,7 +88,7 @@
         // "timezone": "America/New_York",
         "interval": 1,
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "format":"{:%H:%M:%S}",
+        "format":"{:%H:%M:%S %Y-%m-%d}",
         "format-alt": "{:%Y-%m-%d}",
         "calendar": {
             "mode"          : "year",
@@ -128,13 +128,11 @@
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon} {capacity}%",
-        "format-full": "{icon} {capacity}%", 
-        "format-charging": "{icon}󱐋 {capacity}%",
+        "format": "{icon} {capacity}% {time}",
+        "format-full": "{icon} {capacity}% {time}", 
+        "format-charging": "{icon}󱐋 {capacity}% {time}",
         "format-plugged": "{icon} {capacity}%",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
+        "format-time": "{H}h{M}m",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "power-profiles-daemon": {
