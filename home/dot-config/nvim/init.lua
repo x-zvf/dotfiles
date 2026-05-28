@@ -97,7 +97,16 @@ vim.pack.add({
 require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "branch", "filename" },
+    lualine_b = {
+      "branch",
+      {
+        "filename",
+        file_status = true,
+        newfile_status = false,
+        path = 1,
+        shorting_target = 40,
+      },
+    },
     lualine_c = { "diff", "diagnostics", { "navic", color_correction = nil } },
     lualine_x = { "lsp_status" },
     lualine_y = { "filetype" },
@@ -309,7 +318,7 @@ conform.setup({
   },
 })
 
-local autoformat = true
+local autoformat = false
 vim.keymap.set("n", "<leader>fae", function()
   autoformat = true
 end, { desc = "[F]ormat [A]utomatically on save [E]nable" })
@@ -319,14 +328,14 @@ vim.keymap.set("n", "<leader>fad", function()
 end, { desc = "[F]ormat [A]utomatically on save [D]isable" })
 
 vim.keymap.set("n", "<leader>fb", function()
-  conform.format({ async = true, lsp_fallback = true })
+  conform.format({ async = true, lsp_fallback = true, timeout_ms = 2500 })
 end, { desc = "[F]ormat [B]uffer" })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function(args)
     if autoformat then
-      conform.format({ bufnr = args.buf, lsp_fallback = true })
+      conform.format({ bufnr = args.buf, lsp_fallback = true, timeout_ms = 2500 })
     end
   end,
 })
@@ -351,9 +360,70 @@ vim.keymap.set("n", "<leader>tll", "<cmd>Trouble loclist toggle<cr>", { desc = "
 vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle<cr>", { desc = "[T]rouble [Q]uickfix List" })
 
 vim.pack.add({
+  "https://github.com/folke/which-key.nvim",
+})
+require("which-key").setup({
+  triggers = {
+    { "<auto>", mode = "nixsotc" },
+    { "a", mode = { "n", "v" } },
+  },
+})
+
+vim.pack.add({
   "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/nvim-lua/plenary.nvim",
 })
+
+vim.pack.add({
+  "https://github.com/kevinhwang91/nvim-ufo",
+  "https://github.com/kevinhwang91/promise-async",
+})
+
+vim.opt.foldcolumn = '1'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldinner: ,foldclose:'
+
+local ufo = require('ufo')
+ufo.setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end,
+    enable_get_fold_virt_text = true,
+
+    fold_virt_text_handler = 
+    function(virtText, lnum, endLnum, width, truncate)
+    local newVirtText = {}
+    local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+    local sufWidth = vim.fn.strdisplaywidth(suffix)
+    local targetWidth = width - sufWidth
+    local curWidth = 0
+    for _, chunk in ipairs(virtText) do
+        local chunkText = chunk[1]
+        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+        if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+        else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, {chunkText, hlGroup})
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            -- str width returned from truncate() may less than 2nd argument, need padding
+            if curWidth + chunkWidth < targetWidth then
+                suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+        end
+        curWidth = curWidth + chunkWidth
+    end
+    table.insert(newVirtText, {suffix, 'MoreMsg'})
+    return newVirtText
+end
+
+})
+vim.keymap.set('n', 'zR', ufo.openAllFolds)
+vim.keymap.set('n', 'zM', ufo.closeAllFolds)
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
@@ -499,7 +569,7 @@ vim.api.nvim_create_user_command("LTexSetLang", function(opts)
 
   for _, client in ipairs(clients) do
     if client.name == "ltex_plus" then
-      client.config.settings.ltex.language = opts.fargs[1]
+      client.config.settings.ltex.language = tostring(opts.fargs[1])
       vim.lsp.buf_notify(0, "workspace/didChangeConfiguration", { settings = client.config.settings })
       return
     end
