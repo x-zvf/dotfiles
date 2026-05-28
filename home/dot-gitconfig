@@ -6,7 +6,7 @@
   pager = delta
 [user]
   email = peter@bohner.me
-  name = Péter Bohner (xzvf)
+  name = Peter Bohner
   signingkey = ~/.ssh/id_ed25519.pub
 [push]
   autoSetupRemote = true
@@ -17,3 +17,8 @@
   helper = store
 [init]
   defaultBranch = master
+[sendemail]
+	smtpserver = smtp.mailbox.org
+	smtpuser = xzvf@mailbox.org
+	smtpencryption = ssl
+	smtpserverport = 465
