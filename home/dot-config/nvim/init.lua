@@ -39,8 +39,9 @@ vim.keymap.set("n", "<leader>wh", "<C-w><C-h>", { desc = "[W]indow focus left" }
 vim.keymap.set("n", "<leader>wl", "<C-w><C-l>", { desc = "[W]indow focus right" })
 vim.keymap.set("n", "<leader>wj", "<C-w><C-j>", { desc = "[W]indow focus down" })
 vim.keymap.set("n", "<leader>wk", "<C-w><C-k>", { desc = "[W]indow focus up" })
-vim.keymap.set("n", "<leader>ww", "<CMD>split<CR>", { desc = "[W]indow split horizontal" })
-vim.keymap.set("n", "<leader>wv", "<CMD>vsplit<CR>", { desc = "[W]indow split vertical" })
+vim.keymap.set("n", "<leader>ws", "<CMD>split<CR>", { desc = "[W]indow [S]plit horizontal" })
+vim.keymap.set("n", "<leader>wv", "<CMD>vsplit<CR>", { desc = "[W]indow split [V]ertical" })
+vim.keymap.set("n", "<leader>wt", "<cmd>tabnew<cr>", { desc = "[W]indow new [T]ab" })
 
 vim.keymap.set("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
 vim.keymap.set("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
@@ -53,7 +54,6 @@ vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "[t", "<cmd>bprevious<cr>", { desc = "Prev Tab" })
 vim.keymap.set("n", "]t", "<cmd>bnext<cr>", { desc = "Next Tab" })
-vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New Tab" })
 
 vim.pack.add({ "https://github.com/EdenEast/nightfox.nvim" })
 require("nightfox").setup({
@@ -286,7 +286,7 @@ vim.pack.add({
   "https://github.com/nvim-tree/nvim-web-devicons", -- dep
 })
 require("nvim-tree").setup({})
-vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle neovim tree" })
+vim.keymap.set("n", "<leader>uf", "<cmd>NvimTreeToggle<CR>", { desc = "[U]I [F]iletree toggle" })
 
 vim.pack.add({
   "https://github.com/lewis6991/gitsigns.nvim",
@@ -296,7 +296,7 @@ vim.pack.add({
 require("gitsigns").setup({})
 
 vim.pack.add({ "https://github.com/olrtg/nvim-emmet" })
-vim.keymap.set({ "n", "v" }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
+vim.keymap.set({ "n", "v" }, "<leader>ce", require("nvim-emmet").wrap_with_abbreviation, { desc = "[C]ode [E]mmet" })
 
 vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 local conform = require("conform")
@@ -319,17 +319,17 @@ conform.setup({
 })
 
 local autoformat = false
-vim.keymap.set("n", "<leader>fae", function()
+vim.keymap.set("n", "<leader>cfe", function()
   autoformat = true
-end, { desc = "[F]ormat [A]utomatically on save [E]nable" })
+end, { desc = "[C]ode auto [F]ormat [E]nable" })
 
-vim.keymap.set("n", "<leader>fad", function()
+vim.keymap.set("n", "<leader>cfd", function()
   autoformat = false
-end, { desc = "[F]ormat [A]utomatically on save [D]isable" })
+end, { desc = "[C]ode auto [F]ormat [D]isable" })
 
-vim.keymap.set("n", "<leader>fb", function()
+vim.keymap.set("n", "<leader>cfb", function()
   conform.format({ async = true, lsp_fallback = true, timeout_ms = 2500 })
-end, { desc = "[F]ormat [B]uffer" })
+end, { desc = "[C]code auto [F]ormat [B]uffer" })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
@@ -342,22 +342,25 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.pack.add({ "https://github.com/folke/trouble.nvim" })
 require("trouble").setup({ use_diagnostic_signs = true })
-vim.keymap.set("n", "<leader>tda", "<cmd>Trouble diagnostics toggle<cr>", { desc = "[T]rouble [D]iagnostics [A]ll" })
 vim.keymap.set(
   "n",
-  "<leader>td",
+  "<leader>utda",
+  "<cmd>Trouble diagnostics toggle<cr>",
+  { desc = "[U]I [T]rouble [D]iagnostics [A]ll" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>utdb",
   "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-  { desc = "[T]rouble [D]iagnostics (buf)" }
+  { desc = "[U]I [D]iagnostics [B]uffer" }
 )
-vim.keymap.set("n", "<leader>ts", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "[T]rouble [S]ymbols" })
+vim.keymap.set("n", "<leader>uts", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "[U]I [T]rouble [S]ymbols" })
 vim.keymap.set(
   "n",
-  "<leader>tls",
+  "<leader>uti",
   "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-  { desc = "[T] [LS]P Definitions / references / ..." }
+  { desc = "[U]I [T]rouble lsp [I]for (Definitions / references / ...)" }
 )
-vim.keymap.set("n", "<leader>tll", "<cmd>Trouble loclist toggle<cr>", { desc = "[T]rouble [L]ocation List" })
-vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle<cr>", { desc = "[T]rouble [Q]uickfix List" })
 
 vim.pack.add({
   "https://github.com/folke/which-key.nvim",
@@ -366,6 +369,19 @@ require("which-key").setup({
   triggers = {
     { "<auto>", mode = "nixsotc" },
     { "a", mode = { "n", "v" } },
+  },
+  spec = {
+    { "<leader>w", group = "[W]indow" },
+    { "<leader>c", group = "[C]ode" },
+    { "<leader>cf", group = "[C]ode [F]ormat" },
+    { "<leader>u", group = "[U]I" },
+    { "<leader>ut", group = "[U]I [T]rouble" },
+    { "<leader>f", group = "[F]ind" },
+    { "<leader>l", group = "[L]sp" },
+    { "<leader>lg", group = "[L]sp [G]oto" },
+    { "<leader>ls", group = "[L]sp [S]ymbols" },
+    { "<leader>d", group = "[D]ebugger" },
+    { "<leader>ds", group = "[D]ebugger [S]tep" },
   },
 })
 
@@ -379,51 +395,49 @@ vim.pack.add({
   "https://github.com/kevinhwang91/promise-async",
 })
 
-vim.opt.foldcolumn = '1'
+vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
-vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldinner: ,foldclose:'
+vim.o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldinner: ,foldclose:"
 
-local ufo = require('ufo')
+local ufo = require("ufo")
 ufo.setup({
-    provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
-    end,
-    enable_get_fold_virt_text = true,
+  provider_selector = function(bufnr, filetype, buftype)
+    return { "treesitter", "indent" }
+  end,
+  enable_get_fold_virt_text = true,
 
-    fold_virt_text_handler = 
-    function(virtText, lnum, endLnum, width, truncate)
+  fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
-    local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+    local suffix = (" 󰁂 %d "):format(endLnum - lnum)
     local sufWidth = vim.fn.strdisplaywidth(suffix)
     local targetWidth = width - sufWidth
     local curWidth = 0
     for _, chunk in ipairs(virtText) do
-        local chunkText = chunk[1]
-        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-        if targetWidth > curWidth + chunkWidth then
-            table.insert(newVirtText, chunk)
-        else
-            chunkText = truncate(chunkText, targetWidth - curWidth)
-            local hlGroup = chunk[2]
-            table.insert(newVirtText, {chunkText, hlGroup})
-            chunkWidth = vim.fn.strdisplaywidth(chunkText)
-            -- str width returned from truncate() may less than 2nd argument, need padding
-            if curWidth + chunkWidth < targetWidth then
-                suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
-            end
-            break
+      local chunkText = chunk[1]
+      local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+      if targetWidth > curWidth + chunkWidth then
+        table.insert(newVirtText, chunk)
+      else
+        chunkText = truncate(chunkText, targetWidth - curWidth)
+        local hlGroup = chunk[2]
+        table.insert(newVirtText, { chunkText, hlGroup })
+        chunkWidth = vim.fn.strdisplaywidth(chunkText)
+        -- str width returned from truncate() may less than 2nd argument, need padding
+        if curWidth + chunkWidth < targetWidth then
+          suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
         end
-        curWidth = curWidth + chunkWidth
+        break
+      end
+      curWidth = curWidth + chunkWidth
     end
-    table.insert(newVirtText, {suffix, 'MoreMsg'})
+    table.insert(newVirtText, { suffix, "MoreMsg" })
     return newVirtText
-end
-
+  end,
 })
-vim.keymap.set('n', 'zR', ufo.openAllFolds)
-vim.keymap.set('n', 'zM', ufo.closeAllFolds)
+vim.keymap.set("n", "zR", ufo.openAllFolds)
+vim.keymap.set("n", "zM", ufo.closeAllFolds)
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
@@ -435,7 +449,7 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep"
 vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
 vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
 vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
-vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind [B]uffers" })
 vim.keymap.set("n", "<leader>/", function()
   builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
     winblend = 10,
@@ -443,14 +457,12 @@ vim.keymap.set("n", "<leader>/", function()
   }))
 end, { desc = "[/] Fuzzily search in current buffer" })
 
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
-vim.keymap.set("n", "<leader>s/", function()
+vim.keymap.set("n", "<leader>f/", function()
   builtin.live_grep({
     grep_open_files = true,
     prompt_title = "Live Grep in Open Files",
   })
-end, { desc = "[S]earch [/] in Open Files" })
+end, { desc = "[F]ind [/] in open files" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -473,19 +485,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.bo[buf].syntax = "ON"
     end
 
-    map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
-    map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-    map("gr", builtin.lsp_references, "[G]oto [R]eferences")
-    map("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
-    map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
+    map("<leader>lgd", builtin.lsp_definitions, "[L]sp [G]oto [D]efinition")
+    map("<leader>lgD", vim.lsp.buf.declaration, "[L]sp [G]oto [D]eclaration")
+    map("<leader>lgr", builtin.lsp_references, "[L]sp [G]oto [R]eferences")
+    map("<leader>lgI", builtin.lsp_implementations, "[L]sp [G]oto [I]mplementation")
+    map("<leader>lgy", builtin.lsp_type_definitions, "[L]sp [G]oto T[y]pe Definition")
+    map("<leader>lgi", builtin.lsp_incoming_calls, "[L]sp [G]oto [I]coming calls")
+    map("<leader>lgo", builtin.lsp_incoming_calls, "[L]sp [G]oto [O]utgoing calls")
     map("K", function()
       return vim.lsp.buf.hover()
     end, "Hover")
-    map("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
-    map("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
-    map("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-    map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-    map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+    map("<leader>lsd", builtin.lsp_document_symbols, "[L]sp [S]ymbols [D]ocument")
+    map("<leader>lsw", builtin.lsp_dynamic_workspace_symbols, "[L]sp [S]ymbols [W]orkspace")
+    map("<leader>lr", vim.lsp.buf.rename, "[L]sp [R]ename")
+    map("<leader>lc", vim.lsp.buf.code_action, "[L]sp [C]ode action")
+    map("<leader>lh", vim.lsp.buf.signature_help, "[L]sp signature [H]elp")
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client == nil then
@@ -515,9 +529,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     if client:supports_method("textDocument/inlayHint") then
-      map("<leader>th", function()
+      map("<leader>li", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-      end, "[T]oggle Inlay [H]ints")
+      end, "[L]sp [I]nlay hints toggle")
     end
 
     if client:supports_method("textDocument/documentSymbol") then
@@ -533,28 +547,6 @@ require("typst-preview").setup({})
 
 vim.filetype.add({ extension = { templ = "templ" } })
 vim.filetype.add({ extension = { svelte = "svelte" } })
-
-vim.pack.add({ "https://github.com/folke/trouble.nvim" })
-require("trouble").setup({
-  use_diagnostic_signs = true,
-})
-
-vim.keymap.set("n", "<leader>tda", "<cmd>Trouble diagnostics toggle<cr>", { desc = "[T]rouble [D]iagnostics [A]ll" })
-vim.keymap.set(
-  "n",
-  "<leader>td",
-  "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-  { desc = "[T]rouble [D]iagnostics (buf)" }
-)
-vim.keymap.set("n", "<leader>ts", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "[T]rouble [S]ymbols" })
-vim.keymap.set(
-  "n",
-  "<leader>tls",
-  "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-  { desc = "[T] [LS]P Definitions / references / ..." }
-)
-vim.keymap.set("n", "<leader>tll", "<cmd>Trouble loclist toggle<cr>", { desc = "[T]rouble [L]ocation List" })
-vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist toggle<cr>", { desc = "[T]rouble [Q]uickfix List" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
@@ -575,3 +567,147 @@ vim.api.nvim_create_user_command("LTexSetLang", function(opts)
     end
   end
 end, { nargs = 1 })
+
+vim.pack.add({
+  "https://codeberg.org/mfussenegger/nvim-dap",
+  "https://github.com/rcarriga/nvim-dap-ui",
+  "https://github.com/theHamsta/nvim-dap-virtual-text",
+
+  "https://github.com/nvim-neotest/nvim-nio",
+  "https://codeberg.org/mfussenegger/nvim-dap-python",
+  "https://github.com/leoluz/nvim-dap-go",
+})
+local dap = require("dap")
+local dapui = require("dapui")
+dapui.setup({})
+require("nvim-dap-virtual-text").setup({
+  all_references = true,
+  clear_on_continue = true,
+  display_callback = function(variable, buf, stackframe, node, options)
+    local val = variable.value:gsub("%s+", " ")
+    if string.len(val) > 20 then
+      return " " .. string.sub(val, 1, 17) .. "... "
+    end
+    return " " .. val
+  end,
+})
+dap.listeners.before.attach.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
+end
+
+vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "[D]ebugger [B]reakpoint toggle" })
+vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "[D]ebugger [C]ontinue" })
+vim.keymap.set("n", "<leader>dr", dap.restart, { desc = "[D]ebugger re[s]tart" })
+vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "[D]ebugger [T]erminate" })
+vim.keymap.set("n", "<leader>dsc", dap.run_to_cursor, { desc = "[D]ebugger [S]tep (run) to [C]ursor" })
+vim.keymap.set("n", "<leader>dsi", dap.step_into, { desc = "[D]ebugger [S]tep [I]nto <F1>" })
+vim.keymap.set("n", "<leader>dso", dap.step_over, { desc = "[D]ebugger [S]tep [O]ver <F2>" })
+vim.keymap.set("n", "<leader>dsu", dap.step_out, { desc = "[D]ebugger [S]tep [U]p (over) <F3>" })
+vim.keymap.set("n", "<leader>dsb", dap.step_back, { desc = "[D]ebugger [S]tep [B]ackwards <F4>" })
+
+vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Step Into" })
+vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Step Over" })
+vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Step out" })
+vim.keymap.set("n", "<F4>", dap.step_back, { desc = "Step backwards" })
+
+vim.keymap.set({ "n", "v" }, "<leader>de", function()
+  dapui.eval(nil, { enter = true })
+end, { desc = "[D]ebugger [E]val word/region" })
+
+dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    args = {}, -- provide arguments if needed
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  },
+  {
+    name = "Select and attach to process",
+    type = "gdb",
+    request = "attach",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    pid = function()
+      local name = vim.fn.input("Executable name (filter): ")
+      return require("dap.utils").pick_process({ filter = name })
+    end,
+    cwd = "${workspaceFolder}",
+  },
+  {
+    name = "Attach to gdbserver :1234",
+    type = "gdb",
+    request = "attach",
+    target = "localhost:1234",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    cwd = "${workspaceFolder}",
+  },
+}
+dap.configurations.cpp = dap.configurations.c
+
+dap.configurations.rust = {
+  {
+    name = "Launch",
+    type = "rust-gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    args = {}, -- provide arguments if needed
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  },
+  {
+    name = "Select and attach to process",
+    type = "rust-gdb",
+    request = "attach",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    pid = function()
+      local name = vim.fn.input("Executable name (filter): ")
+      return require("dap.utils").pick_process({ filter = name })
+    end,
+    cwd = "${workspaceFolder}",
+  },
+  {
+    name = "Attach to gdbserver :1234",
+    type = "rust-gdb",
+    request = "attach",
+    target = "localhost:1234",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    cwd = "${workspaceFolder}",
+  },
+}
+
+require("dap-go").setup({
+    dap_configurations = {
+    {
+      type = "go",
+      name = "Attach delve air",
+      mode = "remote",
+      host = "127.0.0.1",
+      port = 38697,
+      request = "attach",
+    },
+  },
+})
+require("dap-python").setup("python3")
