@@ -15,7 +15,7 @@ mkcd() {
 }
 wttr()
 {
-  local request="http://v2.wttr.in/"
+  local request="http://v${1:-2}.wttr.in/"
   [ "$(tput cols)" -lt 125 ] && request+='?n'
   curl -L -k -H "Accept-Language: $\{LANG%_*}" --compressed "$request"
 }
