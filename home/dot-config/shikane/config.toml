@@ -16,16 +16,12 @@ name = "docked"
 
 [[profile.output]]
 enable = true
-search = ["m=DELL 2407WFP", "s=UY5457390H2S ", "v=Dell Inc."]
-mode = "1920x1200@59.95Hz"
-position = "336,480"
+search = ["m=0x0BCA", "s=", "v=BOE"]
+mode = "2256x1504@59.999Hz"
+position = "6096,656"
 scale = 1.0
 transform = "normal"
 adaptive_sync = false
-
-[[profile.output]]
-enable = false
-search = ["m=0x0BCA", "s=", "v=BOE"]
 
 [[profile.output]]
 enable = true
@@ -35,7 +31,6 @@ position = "2256,0"
 scale = 1.0
 transform = "normal"
 adaptive_sync = false
-
 
 [[profile]]
 name = "oslab-right"

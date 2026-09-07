@@ -58,7 +58,7 @@ vim.keymap.set("n", "]t", "<cmd>bnext<cr>", { desc = "Next Tab" })
 vim.pack.add({ "https://github.com/EdenEast/nightfox.nvim" })
 require("nightfox").setup({
   options = {
-    transparent = true,
+    --transparent = true,
   },
 })
 vim.cmd.colorscheme("nightfox")
@@ -200,6 +200,7 @@ local language_servers = {
   pyright = {},
   rust_analyzer = {},
   ts_ls = {},
+  ols = {},
   html = {
     filetypes = { "html", "templ", "svelte" },
   },
