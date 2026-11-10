@@ -16,13 +16,15 @@ rstrt() {
 }
 pkill -9 kded6
 
-rstrt waybar
+#rstrt waybar
 rstrt swaybg -i ~/.config/wallpaper
 execifn dunst dunst
 execifn shikane shikane
 execifn kwalletd6 kwalletd6 -d
 execifn wl-paste wl-paste --watch cliphist store
 
+
+nwg-look -a &
 
 execifn firefox firefox
 execifn ferdium ferdium

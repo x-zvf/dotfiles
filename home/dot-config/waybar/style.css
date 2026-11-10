@@ -15,7 +15,7 @@
 /* } */
 
 #waybar {
-  background: alpha(@background, 0.7);
+  background: alpha(@background, 0.8);
   color: @cursor;
 }
 
@@ -58,22 +58,6 @@
   background: @green;
 }
 
-#workspaces,
-#window,
-#network,
-#cpu,
-#memory,
-#temperature,
-#battery,
-#pulseaudio,
-#backlight,
-#power-profiles-daemon,
-#idle_inhibitor,
-#keyboard-state,
-#tray,
-#clock
-{
-}
 
 #network,
 #cpu,
